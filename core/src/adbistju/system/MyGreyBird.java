@@ -9,8 +9,8 @@ public class MyGreyBird extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	Texture imgBack;
-	float x = 10;
-	float y = 0;
+	float x = 1000;
+	float y = 200;
 
 	@Override
 	public void create () {
@@ -24,7 +24,7 @@ public class MyGreyBird extends ApplicationAdapter {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
 		batch.draw(imgBack, 0, 0);
-		batch.draw(img, (x++)+(x++), y++);
+		batch.draw(img, (x--)+(x--), y--);
 		if(x>1000){
 			x = 0;
 			y = 0;
