@@ -1,40 +1,13 @@
 package adbistju.system;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.Game;
 
-public class MyGreyBird extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	Texture imgBack;
-	float x = 1000;
-	float y = 200;
+import adbistju.system.screen.MenuScreen;
 
+public class MyGreyBird extends Game {
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-		imgBack = new Texture("back.png");
+	public void create() {
+		setScreen(new MenuScreen());
 	}
-
-	@Override
-	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(imgBack, 0, 0);
-		batch.draw(img, (x--)+(x--), y--);
-		if(x>1000){
-			x = 0;
-			y = 0;
-		}
-		batch.end();
-	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
-	}
+		//imgBack = new Texture("back.png");
 }
