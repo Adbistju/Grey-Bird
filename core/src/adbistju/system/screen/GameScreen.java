@@ -14,10 +14,11 @@ import adbistju.system.sprite.Star;
 
 public class GameScreen extends BaseScreen {
 
-    private static final int STAR_COUNT = 64;
+    private static final int STAR_COUNT = 1024;
 
     private Texture bg;
     private TextureAtlas atlas;
+    private TextureAtlas atlas1;
 
     private Background background;
     private Star[] stars;
@@ -28,12 +29,13 @@ public class GameScreen extends BaseScreen {
     @Override
     public void show() {
         super.show();
-        bg = new Texture("textures/bg.png");
+        bg = new Texture("1719751.png");
         background = new Background(bg);
         atlas = new TextureAtlas("textures/mainAtlas.tpack");
+        atlas1 = new TextureAtlas("textures/menuAtlas.tpack");
         stars = new Star[STAR_COUNT];
         for (int i = 0; i < stars.length; i++) {
-            stars[i] = new Star(atlas);
+            stars[i] = new Star(atlas1);
         }
         bulletPool = new BulletPool();
         mainShip = new MainShip(atlas, bulletPool);
