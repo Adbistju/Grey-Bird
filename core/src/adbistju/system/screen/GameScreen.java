@@ -1,5 +1,7 @@
 package adbistju.system.screen;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -28,6 +30,7 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void show() {
+        Music music = Gdx.audio.newMusic(Gdx.files.internal("13052020.wav"));
         super.show();
         bg = new Texture("1719751.png");
         background = new Background(bg);
@@ -39,6 +42,9 @@ public class GameScreen extends BaseScreen {
         }
         bulletPool = new BulletPool();
         mainShip = new MainShip(atlas, bulletPool);
+        music.setLooping(true);
+        music.setVolume(0.8f);
+        music.play();
 
     }
 
