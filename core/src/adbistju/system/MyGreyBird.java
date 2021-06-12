@@ -9,5 +9,4 @@ public class MyGreyBird extends Game {
 	public void create() {
 		setScreen(new MenuScreen(this));
 	}
-		//imgBack = new Texture("back.png");
 }
