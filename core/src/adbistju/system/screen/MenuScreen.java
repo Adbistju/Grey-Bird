@@ -33,6 +33,7 @@ public class MenuScreen extends BaseScreen {
 
     @Override
     public void show() {
+        
         super.show();
         bg = new Texture("textures/bg.png");
         background = new Background(bg);
