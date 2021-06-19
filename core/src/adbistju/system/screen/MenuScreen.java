@@ -42,7 +42,7 @@ public class MenuScreen extends BaseScreen {
             stars[i] = new Star(atlas);
         }
         exitButton = new ExitButton(atlas);
-        playButton = new PlayButton(atlas, game);
+        playButton = new PlayButton(atlas, getGame());
     }
 
     @Override
@@ -100,5 +100,9 @@ public class MenuScreen extends BaseScreen {
         exitButton.draw(batch);
         playButton.draw(batch);
         batch.end();
+    }
+
+    public Game getGame() {
+        return game;
     }
 }

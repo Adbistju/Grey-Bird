@@ -1,10 +1,12 @@
 package adbistju.system.screen;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -18,12 +20,15 @@ import adbistju.system.utils.*;
 
 public class GameScreen extends BaseScreen {
 
+    private Game game;
+
     private static final int STAR_COUNT = 64;
 
     private enum State {PLAYING, GAME_OVER}
 
     private Texture bg;
     private TextureAtlas atlas;
+    private Texture rePlayBt;
 
     private Background background;
     private Star[] stars;
@@ -42,10 +47,17 @@ public class GameScreen extends BaseScreen {
     private EnemyEmitter enemyEmitter;
     private State state;
 
+    private RePlayButton rePlayButton;
+
+    public GameScreen(Game game) {
+        this.game = game;
+    }
+
     @Override
     public void show() {
         super.show();
         bg = new Texture("1719751.png");
+        rePlayBt = new Texture("replay.png");
         background = new Background(bg);
         atlas = new TextureAtlas("textures/mainAtlas.tpack");
         stars = new Star[STAR_COUNT];
@@ -65,6 +77,7 @@ public class GameScreen extends BaseScreen {
         music.setLooping(true);
         music.play();
         state = State.PLAYING;
+        rePlayButton = new RePlayButton(new TextureRegion(rePlayBt), game);
     }
 
     @Override
@@ -84,6 +97,7 @@ public class GameScreen extends BaseScreen {
         }
         mainShip.resize(worldBounds);
         gameOver.resize(worldBounds);
+        rePlayButton.resize(worldBounds);
     }
 
     @Override
@@ -118,6 +132,7 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public boolean touchDown(Vector2 touch, int pointer, int button) {
+        rePlayButton.touchDown(touch, pointer, button);
         if (state == State.PLAYING) {
             mainShip.touchDown(touch, pointer, button);
         }
@@ -126,6 +141,8 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public boolean touchUp(Vector2 touch, int pointer, int button) {
+        rePlayButton.touchUp(touch, pointer, button);
+
         if (state == State.PLAYING) {
             mainShip.touchUp(touch, pointer, button);
         }
@@ -198,11 +215,13 @@ public class GameScreen extends BaseScreen {
         for (Star star : stars) {
             star.draw(batch);
         }
+        rePlayButton.draw(batch);
         if (state == State.PLAYING) {
             mainShip.draw(batch);
             bulletPool.drawActiveSprites(batch);
             enemyPool.drawActiveSprites(batch);
         } else {
+
             gameOver.draw(batch);
         }
         explosionPool.drawActiveSprites(batch);
